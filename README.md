@@ -1,3 +1,10 @@
 # sea_battle
 
-Use cmake & make to run project.
+Use
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+to run project.
