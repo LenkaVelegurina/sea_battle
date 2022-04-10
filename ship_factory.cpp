@@ -6,11 +6,11 @@ void ShipFactory::DeleteShip(Ship* unit) {
 }
 
 Ship* FirstPlayerShipFactory::CreateShip(ShipType ship_type) {
-    Ship* ship = new Ship();
+    Ship* ship = new Ship(ship_type, PlayerNumber::kFirstPlayer);
     return ship;
 }
 
 Ship* SecondPlayerShipFactory::CreateShip(ShipType ship_type) {
-    Ship* ship = new Ship();
+    Ship* ship = new Ship(ship_type, PlayerNumber::kSecondPlayer);
     return ship;
 }
