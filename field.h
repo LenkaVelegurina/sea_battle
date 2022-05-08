@@ -16,11 +16,15 @@ public:
 
     void set_ships();
 
+    void get_point(char& letter, short& number);
+
+    static void get_point_for_shot(char& letter, short& number);
+
+    bool check_placement(char letter, short number, std::string orientation, ShipType type);
+
+    void get_point_with_orientation(char& letter, short& number, std::string& orientation, ShipType type);
+
     bool check_alive();
 
     bool get_shot(int x, int y);
 };
-
-void get_point(char& letter, short& number);
-
-void get_orientation(std::string& orientation);

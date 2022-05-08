@@ -20,12 +20,10 @@ signed main() {
     // 1
     first_player.authorization();
     first_player.set_ships();
-    first_player.show_field();
 
     // 2
     second_player.authorization();
     second_player.set_ships();
-    second_player.show_field();
 
     //TODO: shot_command
     while (true) {

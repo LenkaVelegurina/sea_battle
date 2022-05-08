@@ -1,10 +1,10 @@
 #pragma once
 
 enum class ShipType {
-    kSingleDeck,
-    kTwoDeck,
-    kThreeDeck,
-    kFourDeck,
+    kSingleDeck = 1,
+    kTwoDeck = 2,
+    kThreeDeck = 3,
+    kFourDeck = 4,
 };
 
 enum class PlayerNumber {
