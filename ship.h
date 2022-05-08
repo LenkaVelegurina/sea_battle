@@ -18,6 +18,8 @@ public:
 
     Ship(ShipType, PlayerNumber);
 
+    bool get_shot(int x, int y);
+
 private:
     PlayerNumber player_number_;
     ShipType type_;

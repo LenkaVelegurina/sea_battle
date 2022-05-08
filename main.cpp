@@ -1,9 +1,9 @@
-#include "iostream"
-#include "player.h"
+#include <iostream>
 #include <string>
+#include "player.h"
 
 signed main() {
-    std::cout << "HEY BROTHER";
+    std::cout << "HEY BROTHER\n";
     // registration
 
     std::cout << "Create password of the first player:\n";
@@ -18,69 +18,32 @@ signed main() {
 
     //set ships
     // 1
-    std::cout << "Enter password of the first player:\n";
-    std::cin >> first_password;
-    while (!first_player.check_password(first_password)) {
-        std::cin >> first_password;
-    }
+    first_player.authorization();
     first_player.set_ships();
     first_player.show_field();
 
     // 2
-    std::cout << "Enter password of the second player:\n";
-    std::cin >> second_password;
-    while (!second_player.check_password(second_password)) {
-        std::cin >> second_password;
-    }
+    second_player.authorization();
     second_player.set_ships();
     second_player.show_field();
 
     //TODO: shot_command
-    char letter;
-    int number;
     while (true) {
-        std::cout << "Enter password of the first player:\n";
-        std::cin >> first_password;
-        while (!first_player.check_password(first_password)) {
-            std::cin >> first_password;
-        }
+        first_player.authorization();
         //shot & check alive
-        std::cin >> letter >> number;
-        //TODO: check format
-        //shot!!!
-        bool verdict = second_player.get_shot(number - 1, letter - 'a');
-        while (verdict){
-            std::cin >> letter >> number;
-            verdict = second_player.get_shot(number - 1, letter - 'a');
-            if(!second_player.check_alive()){
-                break;
-            }
-            second_player.show_field();
-        }
+        first_player.make_move(second_player);
         //check
-        if(!second_player.check_alive()){
+        if (!second_player.check_alive()) {
+            std::cout << "The first player wins the game!!!";
             break;
         }
 
-        std::cout << "Enter password of the second player:\n";
-        std::cin >> second_password;
-        while (!second_player.check_password(second_password)) {
-            std::cin >> second_password;
-        }
+        second_player.authorization();
         //shot & check alive
-        std::cin >> letter >> number;
-        //TODO: check format
-        //shot!!!
-        verdict = first_player.get_shot(number - 1, letter - 'a');
-        while (verdict){
-            std::cin >> letter >> number;
-            verdict = first_player.get_shot(number - 1, letter - 'a');
-            if(!first_player.check_alive()){
-                break;
-            }
-        }
+        second_player.make_move(first_player);
         //check
-        if(!first_player.check_alive()){
+        if (!first_player.check_alive()) {
+            std::cout << "The second player wins the game!!!";
             break;
         }
     }
