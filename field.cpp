@@ -5,7 +5,13 @@ Field::Field() {
 }
 
 void Field::show_field() {
+    std::cout << "   ";
+    for(char i = 'a'; i <= 'j'; ++i){
+        std::cout << i;
+    }
+    std::cout << '\n';
     for (int i = 0; i < this->field_size_; ++i) {
+        std::cout << i + 1 << ((i == 9) ? " " : "  ");
         for (int j = 0; j < this->field_size_; ++j) {
             std::cout << this->field_to_show_[i][j];
         }

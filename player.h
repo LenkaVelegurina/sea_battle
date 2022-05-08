@@ -17,7 +17,7 @@ public:
 
     void authorization();
 
-    void make_move(Player other);
+    void make_move(Player& other);
 
     void set_ships();
 

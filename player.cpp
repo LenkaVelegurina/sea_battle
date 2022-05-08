@@ -43,7 +43,7 @@ void Player::authorization() {
 }
 
 
-void Player::make_move(Player other) {
+void Player::make_move(Player& other) {
     char letter;
     short number;
     //shot!!!
