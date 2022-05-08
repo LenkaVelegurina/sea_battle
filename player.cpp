@@ -42,6 +42,7 @@ void Player::authorization() {
     }
 }
 
+
 void Player::make_move(Player other) {
     char letter;
     short number;
@@ -50,7 +51,7 @@ void Player::make_move(Player other) {
     bool verdict = true;
     while (verdict && other.check_alive()) {
         std::cout << "Enter the coordinates of the point you want to hit:\n";
-        std::cin >> letter >> number;
+        get_point(letter, number);
         verdict = other.get_shot(number - 1, letter - 'a');
         other.show_field();
     }
