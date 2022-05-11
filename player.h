@@ -23,7 +23,9 @@ public:
 
     void show_field();
 
+    void show_field_with_shots();
+
     bool check_alive();
 
-    bool get_shot(int x, int y);
+    bool get_shot(int x, int y, Player& other);
 };

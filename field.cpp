@@ -1,12 +1,15 @@
 #include "field.h"
 
 Field::Field() {
-    field_to_show_ = std::vector<std::vector<char>>(this->field_size_, std::vector<char>(this->field_size_, '.'));
+    field_to_show_ = std::vector<std::vector<char>>(this->field_size_,
+                                                    std::vector<char>(this->field_size_, '.'));
+    shot_field_ = std::vector<std::vector<char>>(this->field_size_,
+                                                 std::vector<char>(this->field_size_, '.'));
 }
 
 void Field::show_field() {
     std::cout << "   ";
-    for(char i = 'a'; i <= 'j'; ++i){
+    for (char i = 'a'; i <= 'j'; ++i) {
         std::cout << i;
     }
     std::cout << '\n';
@@ -18,8 +21,22 @@ void Field::show_field() {
         std::cout << '\n';
     }
 }
+void Field::show_field_with_shots() {
+    std::cout << "   ";
+    for (char i = 'a'; i <= 'j'; ++i) {
+        std::cout << i;
+    }
+    std::cout << '\n';
+    for (int i = 0; i < this->field_size_; ++i) {
+        std::cout << i + 1 << ((i == 9) ? " " : "  ");
+        for (int j = 0; j < this->field_size_; ++j) {
+            std::cout << this->shot_field_[i][j];
+        }
+        std::cout << '\n';
+    }
+}
 
-bool Field::check_placement(char letter, short number, std::string orientation, ShipType type) {
+bool Field::check_placement(char letter, short number, const std::string& orientation, ShipType type) {
     if (orientation == "vertical") {
         for (int i = number - 1; i < number + (short) type; ++i) {
             if (i >= 1 && i <= 10) {
@@ -188,9 +205,10 @@ bool Field::check_alive() {
     return false;
 }
 
-bool Field::get_shot(int x, int y) {
+bool Field::get_shot(int x, int y, Field& other) {
     if (this->field_to_show_[x][y] == 'o') {
         this->field_to_show_[x][y] = '*';
+        other.shot_field_[x][y] = '*';
         return true;
     }
     return false;
