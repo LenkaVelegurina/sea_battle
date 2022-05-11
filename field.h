@@ -29,5 +29,7 @@ public:
 
     bool check_alive();
 
-    bool get_shot(int x, int y, Field& other);
+    std::string get_shot(int x, int y, Field& other);
+
+    std::string get_verdict(int x, int y, Field& other);
 };

@@ -21,6 +21,7 @@ void Field::show_field() {
         std::cout << '\n';
     }
 }
+
 void Field::show_field_with_shots() {
     std::cout << "   ";
     for (char i = 'a'; i <= 'j'; ++i) {
@@ -205,13 +206,46 @@ bool Field::check_alive() {
     return false;
 }
 
-bool Field::get_shot(int x, int y, Field& other) {
+std::string Field::get_verdict(int x, int y, Field& other) {
+    std::vector<std::pair<int, int>> coords;
+    coords.emplace_back(x, y);
+    int t_x = x - 1, t_y = y;
+    while (t_x >= 0 && (this->field_to_show_[t_x][t_y] == 'o' || this->field_to_show_[t_x][t_y] == '*')) {
+        coords.emplace_back(t_x, t_y);
+        t_x--;
+    }
+    t_x = x + 1, t_y = y;
+    while (t_x < field_size_ && (this->field_to_show_[t_x][t_y] == 'o' || this->field_to_show_[t_x][t_y] == '*')) {
+        coords.emplace_back(t_x, t_y);
+        t_x++;
+    }
+    t_x = x, t_y = y + 1;
+    while (t_y < field_size_ && (this->field_to_show_[t_x][t_y] == 'o' || this->field_to_show_[t_x][t_y] == '*')) {
+        coords.emplace_back(t_x, t_y);
+        t_y++;
+    }
+    t_x = x, t_y = y - 1;
+    while (t_y >= 0 && (this->field_to_show_[t_x][t_y] == 'o' || this->field_to_show_[t_x][t_y] == '*')) {
+        coords.emplace_back(t_x, t_y);
+        t_y--;
+    }
+    for (auto coord: coords) {
+        if (other.shot_field_[coord.first][coord.second] != '*') {
+            return "Hit!";
+        }
+    }
+    return "Kill!";
+}
+
+std::string Field::get_shot(int x, int y, Field& other) {
     if (this->field_to_show_[x][y] == 'o') {
         this->field_to_show_[x][y] = '*';
         other.shot_field_[x][y] = '*';
-        return true;
+        return get_verdict(x, y, other);
     }
-    return false;
+    if(other.shot_field_[x][y] != '*')
+        other.shot_field_[x][y] = '-';
+    return "Miss!";
 }
 
 

@@ -26,7 +26,7 @@ bool Player::check_alive() {
     return this->field_.check_alive();
 }
 
-bool Player::get_shot(int x, int y, Player& other) {
+std::string Player::get_shot(int x, int y, Player& other) {
     return this->field_.get_shot(x, y, other.field_);
 }
 
@@ -55,8 +55,10 @@ void Player::make_move(Player& other) {
     while (verdict && other.check_alive()) {
         std::cout << "Enter the coordinates of the point you want to hit:\n";
         Field::get_point_for_shot(letter, number);
-        verdict = other.get_shot(number - 1, letter - 'a', *this);
+        std::string respond = other.get_shot(number - 1, letter - 'a', *this);
+        verdict = (respond != "Miss!");
         this->show_field_with_shots();
+        std::cout << respond << '\n';
     }
 }
 

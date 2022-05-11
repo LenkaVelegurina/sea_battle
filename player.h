@@ -27,5 +27,5 @@ public:
 
     bool check_alive();
 
-    bool get_shot(int x, int y, Player& other);
+    std::string get_shot(int x, int y, Player& other);
 };
